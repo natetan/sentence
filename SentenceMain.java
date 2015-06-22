@@ -1,12 +1,12 @@
 import java.util.Scanner;
 
-public class Sentence_Interaction {
+public class SentenceMain {
 	public static void main(String[] parameters) {
 		giveIntro();
 		Scanner console = new Scanner(System.in);
 		Sentence sentence = new Sentence(getPhrase(console));
 		promptUser(console, sentence);
-		doStuff(console, sentence);
+		interact(console, sentence);
 		
 	}
 
@@ -29,22 +29,35 @@ public class Sentence_Interaction {
 		System.out.println();
 	}
 	
-	public static void doStuff(Scanner console, Sentence sentence) {
+	public static void interact(Scanner console, Sentence sentence) {
 		System.out.println("What would you like to do?");
 		String option1 = "1) Reverse your phrase";
 		String option2 = "2) Scramble your phrase";
-		String option3 = "3) Quit this stupid program";
-		System.out.printf("\t%s\n\t%s\n\t%s\n", option1, option2, option3);
+		String option3 = "3) Add words to the phrase";
+		String option4 = "4) Print out your phrase";
+		String option5 = "5) Quit this stupid program";
+		System.out.printf("\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\n", option1, option2, option3, option4, option5);
 		System.out.print("I want to: ");
 		int response = console.nextInt();
 		if (response == 1) {
 			System.out.println("Reversed sentence: " + sentence.reverse());
 			System.out.println();
-			doStuff(console, sentence);
+			interact(console, sentence);
 		} else if (response == 2) {
 			System.out.println("Scrambled sentence: " + sentence.scramble());
 			System.out.println();
-			doStuff(console, sentence);
+			interact(console, sentence);
+		} else if (response == 3) {
+			System.out.println("Give me words to add to the list");
+			System.out.print("Type here: ");
+			// The problem is that this line only takes 1 word at a time...
+			sentence.add(console.next());
+			System.out.println();
+			interact(console, sentence);
+		} else if (response == 4) {
+			System.out.println("Your phrase: " + sentence.toString());
+			System.out.println();
+			interact(console, sentence);
 		} else {
 			System.out.printf("\t%s", "You've ended this stupid program. Have a nice day!");
 		}
